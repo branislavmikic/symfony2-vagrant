@@ -4,6 +4,10 @@ Exec { path => [ "/bin/", "/sbin/" , "/usr/bin/", "/usr/sbin/" ] }
 class system-update {
 
     exec { 'apt-get update':
+        command => 'apt-add-repository ppa:chris-lea/node.js',
+
+    }
+    exec { 'apt-get update':
         command => 'apt-get update',
     }
 }
@@ -19,13 +23,8 @@ class dev-packages {
         require => Exec['apt-get update'],
     }
 
-		exec { 'enable ability to install npm packages':
-				command => 'npm config set registry http://registry.npmjs.org/',
-				require => Package["npm"],
-		}
-
-		exec { 'install less using npm':
-				command => 'npm install less -g --no-bin-links',
+				exec { 'install less using npm':
+				command => 'npm install less -g',
 				require => Package["npm"],
 		}
 

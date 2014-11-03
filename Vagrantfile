@@ -15,7 +15,4 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
         puppet.module_path = "puppet/modules"
         puppet.options = ['--verbose']
     end
-config.vm.provider "virtualbox" do |v|
-    v.customize ["setextradata", :id, "VBoxInternal2/SharedFoldersEnableSymlinksCreate/v-root", "1"]
-end
 end
