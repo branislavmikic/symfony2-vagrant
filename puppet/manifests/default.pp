@@ -1,36 +1,32 @@
 Exec { path => [ "/bin/", "/sbin/" , "/usr/bin/", "/usr/sbin/" ] }
 
-class nodejs-less-setup {
+class nodejs-less-install {
  
-    exec { 'install less using npm':
-	command => 'sudo npm install less -g',
-	require => Exec['install nodejs'],
-
+	exec { 'install less using npm':
+ 		command => 'sudo npm install less -g',
+		require => Exec['install nodejs'],
 	}
-   exec { 'install nodejs':
+
+	exec { 'install nodejs':
 		command => 'sudo apt-get install nodejs -y',
 		path => '/usr/bin/',
 		require => Exec['apt-get update II'],
     }
  
-    exec { 'apt-get update II':
+	exec { 'apt-get update II':
 		command => '/usr/bin/apt-get update',
 		require => Exec['sudo add-apt-repository ppa:chris-lea/node.js']
     }
  
-  exec { 'sudo add-apt-repository ppa:chris-lea/node.js':
+ 	exec { 'sudo add-apt-repository ppa:chris-lea/node.js':
 		command => 'sudo add-apt-repository ppa:chris-lea/node.js',
 		path => '/usr/bin/',
 	}
-  
-  exec { 'install python-1':
-	command => 'sudo apt-get install python-software-properties',
-    
+  	
+  	exec { 'install python-software-properties':
+		command => 'sudo apt-get install python-software-properties -y',
 		path => '/usr/bin/',
-	}
- 
-
-    
+	}   
 }
 
 
@@ -236,10 +232,10 @@ Exec["apt-get update"] -> Package <| |>
 
 include system-update
 include nodejs-less-setup 
-#include dev-packages
-#include nginx-setup
-#include php-setup
-#include composer
-#include phpqatools
-#include memcached
-#include redis
+include dev-packages
+include nginx-setup
+include php-setup
+include composer
+include phpqatools
+include memcached
+include redis
