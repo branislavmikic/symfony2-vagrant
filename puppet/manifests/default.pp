@@ -33,7 +33,7 @@ class dev-packages {
     }
 
 				exec { 'install less using npm':
-				command => 'npm install less -g',
+				command => 'sudo npm install less -g',
 				require => Package["npm"],
 		}
 
@@ -220,6 +220,7 @@ class { 'apt':
 
 Exec["apt-get update"] -> Package <| |>
 
+include repository-update 
 include system-update
 include dev-packages
 include nginx-setup
@@ -228,4 +229,3 @@ include composer
 include phpqatools
 include memcached
 include redis
-include repository-update 
