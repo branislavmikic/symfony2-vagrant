@@ -25,7 +25,7 @@ class dev-packages {
 		}
 
 		exec { 'install less using npm':
-				command => 'npm install less -g',
+				command => 'npm install less -g --no-bin-links',
 				require => Package["npm"],
 		}
 
