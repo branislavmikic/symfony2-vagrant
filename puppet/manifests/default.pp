@@ -19,10 +19,15 @@ class dev-packages {
         require => Exec['apt-get update'],
     }
 
-    exec { 'install less using npm':
-        command => 'npm install less -g',
-        require => Package["npm"],
-    }
+		exec { 'enable ability to install npm packages':
+				command => 'npm config set registry http://registry.npmjs.org/',
+				require => Package["npm"],
+		}
+
+		exec { 'install less using npm':
+				command => 'npm install less -g',
+				require => Package["npm"],
+		}
 
     exec { 'install capifony using RubyGems':
         command => 'gem install capifony',
