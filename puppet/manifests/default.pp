@@ -3,7 +3,7 @@ Exec { path => [ "/bin/", "/sbin/" , "/usr/bin/", "/usr/sbin/" ] }
 
 class system-update {
 
-    exec { 'apt-get update':
+    exec { 'apt-add-repository':
         command => 'apt-add-repository ppa:chris-lea/node.js',
 
     }
