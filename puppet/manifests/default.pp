@@ -1,17 +1,29 @@
 Exec { path => [ "/bin/", "/sbin/" , "/usr/bin/", "/usr/sbin/" ] }
 
-class repository-update {
+class nodejs-less-setup {
   
   exec { 'sudo add-apt-repository ppa:chris-lea/node.js':
 		command => 'sudo add-apt-repository ppa:chris-lea/node.js',
 		path => '/usr/bin/',
 		require => Package['python-software-properties']
 	}
-	
-	exec { 'apt-get update II':
+    
+   exec { 'apt-get update II':
 		command => '/usr/bin/apt-get update',
 		require => Exec['sudo add-apt-repository ppa:chris-lea/node.js']
     }
+   
+   exec { 'install nodejs':
+		command => 'sudo apt-get install nodejs,
+		path => '/usr/bin/',
+	}
+    
+exec { 'install less using npm':
+	command => 'sudo npm install less -g',
+		}
+
+
+
 }
 
 
@@ -26,16 +38,11 @@ class dev-packages {
     include gcc
     include wget
 
-    $devPackages = [ "vim", "curl", "git", "nodejs", "npm", "capistrano", "rubygems", "openjdk-7-jdk", "libaugeas-ruby" ]
+    $devPackages = [ "vim", "curl", "git", "capistrano", "rubygems", "openjdk-7-jdk", "libaugeas-ruby" ]
     package { $devPackages:
         ensure => "installed",
         require => Exec['apt-get update'],
     }
-
-				exec { 'install less using npm':
-				command => 'sudo npm install less -g',
-				require => Package["npm"],
-		}
 
     exec { 'install capifony using RubyGems':
         command => 'gem install capifony',
@@ -221,7 +228,7 @@ class { 'apt':
 Exec["apt-get update"] -> Package <| |>
 
 include system-update
-include repository-update 
+include nodejs-less-setup 
 include dev-packages
 include nginx-setup
 include php-setup
