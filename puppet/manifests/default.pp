@@ -8,20 +8,14 @@ class system-update {
         command => 'apt-get update',
     }
     exec { 'sudo add-apt-repository ppa:chris-lea/node.js':
-	command => 'add-apt-repository ppa:chris-lea/node.js',
+	command => 'sudo add-apt-repository ppa:chris-lea/node.js',
 	path => '/usr/bin/',
 	require => Package['python-software-properties']
     }
     exec { 'apt-get update II':
 	command => '/usr/bin/apt-get update',
-	require => Exec['sudo add-apt-repository ppa:mosquitto-dev/mosquitto-ppa']
+	require => Exec['sudo add-apt-repository ppa:chris-lea/node.js']
     }
-
-
-
-
-
-
 
 }
 
