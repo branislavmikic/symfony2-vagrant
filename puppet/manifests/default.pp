@@ -228,4 +228,4 @@ include composer
 include phpqatools
 include memcached
 include redis
-class repository-update 
+include repository-update 
