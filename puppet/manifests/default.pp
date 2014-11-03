@@ -16,11 +16,15 @@ class nodejs-less-setup {
    exec { 'install nodejs':
 		command => 'sudo apt-get install nodejs',
 		path => '/usr/bin/',
+		require => Exec['apt-get update II']
+    }
 	}
     
     exec { 'install less using npm':
 	command => 'sudo npm install less -g'
-		}
+	require => Exec['install nodejs']
+
+	}
 
 }
 
