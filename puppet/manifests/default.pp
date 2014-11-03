@@ -220,8 +220,8 @@ class { 'apt':
 
 Exec["apt-get update"] -> Package <| |>
 
-include repository-update 
 include system-update
+include repository-update 
 include dev-packages
 include nginx-setup
 include php-setup
