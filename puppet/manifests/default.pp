@@ -1,6 +1,6 @@
 Exec { path => [ "/bin/", "/sbin/" , "/usr/bin/", "/usr/sbin/" ] }
 
-class nodejs-less-install {
+class nodejs-less-setup {
  
 	exec { 'install less using npm':
  		command => 'sudo npm install less -g',
